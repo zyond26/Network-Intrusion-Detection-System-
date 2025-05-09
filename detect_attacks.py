@@ -22,4 +22,4 @@ def detect_attacks(packet):
                 print(f"ALERT: DDoS attack from {src_ip}")
 
 # Bắt gói tin và phân tích
-sniff(prn=detect_attacks, filter="tcp", store=0)
+sniff(prn=detect_attacks, filter="tcp", store=0, count = 100)

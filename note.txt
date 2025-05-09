@@ -1,0 +1,103 @@
+Dưới đây là hướng dẫn chi tiết về dataset để thử nghiệm dự án NIDS, cách tích hợp vào code, và kết quả mong đợi:
+
+1. Các Dataset Phổ Biến cho NIDS
+a. Dataset KDD Cup 1999 (Tiêu chuẩn vàng)
+Mô tả:
+
+4.9 triệu bản ghi, 41 features (duration, protocol_type, flag, src_bytes, dst_bytes...).
+
+24 loại tấn công (DoS, Probe, R2L, U2R).
+
+Download:
+wget https://kdd.ics.uci.edu/databases/kddcup99/kddcup.data.gz
+gunzip kddcup.data.gz
+Vị trí trong code:
+Thay thế file network_traffic.csv bằng kddcup.data trong phần đọc dữ liệu:
+data = pd.read_csv('kddcup.data', header=None)
+b. NSL-KDD (Cải tiến từ KDD Cup 99)
+Ưu điểm:
+Loại bỏ dữ liệu trùng lặp, cân bằng hơn.
+
+Download:
+wget https://www.unb.ca/cic/datasets/nsl.html
+c. CICIDS2017 (Dữ liệu hiện đại)
+Mô tả:
+
+Lưu lượng mạng thực tế, bao gồm Brute Force, XSS, DDoS.
+
+Download:
+wget https://www.unb.ca/cic/datasets/ids-2017.html
+2. Cách Thêm Dataset vào Code
+Bước 1: Chuẩn bị dữ liệu
+Chuyển dataset về định dạng CSV (nếu cần):
+import pandas as pd
+data = pd.read_csv('kddcup.data', header=None)
+data.to_csv('processed_traffic.csv', index=False)
+Bước 2: Sửa code train_model.py
+
+# Đọc dataset
+data = pd.read_csv('processed_traffic.csv')
+
+# Chọn features và nhãn (ví dụ với KDD Cup 99)
+features = data[[1, 2, 3]]  # protocol_type, service, flag
+labels = data[41]           # Nhãn tấn công (0: normal, 1: attack)
+
+# Huấn luyện mô hình
+model = RandomForestClassifier()
+model.fit(features, labels)
+Bước 3: Đánh giá kết quả
+
+from sklearn.metrics import classification_report
+y_pred = model.predict(X_test)
+print(classification_report(y_test, y_pred))
+3. Kết Quả Nhận Được
+a. Kết quảm mẫu với KDD Cup 99
+Metric	Giá trị
+Accuracy	95.2%
+Precision (DoS)	96.1%
+Recall (Probe)	94.8%
+b. Output mẫu từ terminal
+plaintext
+ALERT: Port Scan detected from 192.168.1.5
+ALERT: DDoS attack from 10.0.0.2
+Model Accuracy: 95.2%
+c. Giao diện cảnh báo
+Dashboard
+
+4. Ví dụ tích hợp dataset thực tế
+a. Với dataset CICIDS2017
+Bước 1: Tải file MachineLearningCSV.csv từ CICIDS2017.
+
+Bước 2: Xử lý dữ liệu:
+data = pd.read_csv('MachineLearningCSV.csv')
+# Chọn features quan trọng
+features = data[['Destination Port', 'Flow Duration', 'Total Fwd Packets']]
+labels = data['Label'].apply(lambda x: 1 if x != 'BENIGN' else 0)
+Bước 3: Huấn luyện và đánh giá tương tự.
+
+5. Lưu ý quan trọng
+Tiền xử lý dữ liệu:
+
+Xử lý giá trị thiếu: data.fillna(0).
+
+Chuẩn hóa dữ liệu: from sklearn.preprocessing import StandardScaler.
+
+Lưu trữ dataset:
+
+Đặt dataset trong thư mục data/ để dễ quản lý.
+
+Ví dụ:
+
+project/
+├── data/
+│   ├── kddcup.data
+│   └── processed_traffic.csv
+├── detect_attacks.py
+└── train_model.py
+6. Tài nguyên bổ sung
+KDD Cup 99 Documentation: UCI Machine Learning Repository
+
+Sample Code:
+# Load dataset với tên cột
+col_names = ["duration", "protocol_type", "service", ...]
+data = pd.read_csv('kddcup.data', names=col_names)

@@ -2,7 +2,7 @@ from scapy.all import sniff, IP, TCP
 import csv
 
 # Tạo file CSV để lưu dữ liệu
-with open('network_traffic.csv', 'w', newline='') as file:
+with open('kddcup.data_10_percent', 'w', newline='') as file:
     writer = csv.writer(file)
     writer.writerow(["Source_IP", "Destination_Port", "Protocol"])  # Header
 
