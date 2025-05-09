@@ -1,8 +1,7 @@
 # Network-Intrusion-Detection-System-
 
 # 1. Mục tiêu & Phạm vi
-Mục tiêu: Xây dựng hệ thống giám sát lưu lượng mạng, phát hiện tấn công như:</br>
-Port scanning, DDoS, SQL injection, brute force.</br>
+Mục tiêu: Xây dựng hệ thống giám sát lưu lượng mạng, phát hiện tấn công như: Port scanning, DDoS, SQL injection, brute force.</br>
 Đầu ra: Cảnh báo real-time + báo cáo phân tích với độ chính xác 95%. </br>
 
 # 2. Công cụ & Thư viện
