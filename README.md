@@ -2,7 +2,7 @@
 
 # 1. Mục tiêu & Phạm vi
 Mục tiêu: Xây dựng hệ thống giám sát lưu lượng mạng, phát hiện tấn công như: Port scanning, DDoS, SQL injection, brute force.</br>
-Đầu ra: Cảnh báo real-time + báo cáo phân tích với độ chính xác 95%. </br>
+Đầu ra: Cảnh báo real-time + báo cáo phân tích với độ chính xác hơn 95%. </br>
 
 # 2. Công cụ & Thư viện
 Python: Scapy, Pandas, Scikit-learn, Flask (giao diện web).</br>
@@ -10,6 +10,7 @@ Wireshark/Tshark: Phân tích traffic mẫu.</br>
 Jupyter Notebook: Phân tích dữ liệu.</br>
 
 
+* data set đã dùng : kddcup.data_10_percent tải ở kaggle </br>
 # Cách chạy toàn bộ hệ thống 
 1. Bắt traffic:</br>
 python capture_traffic.py</br>
