@@ -27,6 +27,9 @@ Lưu lượng mạng thực tế, bao gồm Brute Force, XSS, DDoS.
 
 Download:
 wget https://www.unb.ca/cic/datasets/ids-2017.html
+
+
+
 2. Cách Thêm Dataset vào Code
 Bước 1: Chuẩn bị dữ liệu
 Chuyển dataset về định dạng CSV (nếu cần):
