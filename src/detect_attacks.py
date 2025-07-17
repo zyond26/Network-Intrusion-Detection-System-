@@ -23,3 +23,5 @@ def detect_attacks(packet):
 
 # Bắt gói tin và phân tích
 sniff(prn=detect_attacks, filter="tcp", store=0, count = 100)
+
+#ok
